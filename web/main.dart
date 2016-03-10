@@ -7,9 +7,50 @@ import 'dart:math';
 List<Element> presSections = querySelectorAll('.presSection');
 
 bool doingScroll = false;
+num startY = 0;
+num curY = -1;
+bool isYInit = false;
 
 void main() {
   presSections.forEach((Element el){
+    el.onTouchStart.listen((TouchEvent evt){
+      if (doingScroll) return;
+      startY = evt.touches[0].page.y;
+      print("Start $startY");
+      isYInit = true;
+    });
+    el.onTouchMove.listen((TouchEvent evt){
+      if (doingScroll) return;
+      if (!isYInit){
+        startY = evt.touches[0].page.y;
+        print("Move Start $startY");
+        isYInit = true;
+      }
+      curY = evt.touches[0].page.y;
+    });
+    el.onTouchEnd.listen((TouchEvent evt){
+      if (doingScroll) return;
+      isYInit = false;
+      if (curY == -1) return;
+      print("End $curY");
+      num delta = curY - startY;
+      int curIndex = 0;
+      for (int i = 0; i < presSections.length ; i++){
+        if (presSections[i].id == el.id) {
+          curIndex = i;
+          break;
+        }
+      }
+      if (delta < 0){
+        if (curIndex == presSections.length-1) return;
+        doingScroll = true;
+        smoothScrolling(presSections[curIndex+1]);
+      } else {
+        if (curIndex == 0) return;
+        doingScroll = true;
+        smoothScrolling(presSections[curIndex-1]);
+      }
+    });
     el.onMouseWheel.listen((WheelEvent evt){
       evt.preventDefault();
       if (doingScroll) return;
