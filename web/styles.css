@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+html{overflow:hidden;}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+#fullscreen{
+    height: 100%;
+}
+.presSection{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.subContent{
+    display: flex;
+    flex-direction: column;
+}
+#presTitle{
+    background-color: #3f51b5;
+    flex-direction: column;
+    justify-content: center;
+}
+#title{
+    font-size: 48px;
+    font-family: Georgia, sans-serif;
+    color: #fff;
+}
+#subTitle{
+    font-size: 24px;
+    font-family: Georgia, sans-serif;
+    color: #fff;
+}
+#presFirst{
+    background-color: #A94A50;
+    color: #fff;
+}
+#presSecond{
+    background-color: #4DA846;
+}
+
+@font-face {
+    font-family: fontTitle;
+    src: url("Oranienbaum.ttf");
+}
+@font-face {
+    font-family: customFontShowcase;
+    src: url("Barkentina.otf");
+}
+@font-face {
+    font-family: customFontParagraph;
+    src: url("Nilland-Black.ttf");
+}
